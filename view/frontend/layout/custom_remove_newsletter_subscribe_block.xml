@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="form.subscribe" remove="true"/>
+        <referenceContainer name="footer">
+            <block class="Magento\Framework\View\Element\Text" name="dummy.text" before="-">
+                <arguments>
+                    <argument name="text" translate="true" xsi:type="string">
+                        <![CDATA[<!-- Newsletter block is gone -->]]>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

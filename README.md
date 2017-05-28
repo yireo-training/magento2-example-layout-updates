@@ -1,4 +1,4 @@
-# TestLayoutUpdates module for Magento 2
+# ExampleLayoutUpdates module for Magento 2
 This module applies some example XML layout updates:
 - Remove the newsletter subscribe block
 - Replace it with a simple Text-block output (comment in HTML source)
@@ -7,9 +7,9 @@ This module applies some example XML layout updates:
 ## Installation
 Install this module using composer:
 
-    composer require yireo/test-layout-updates
+    composer require yireo-training/magento2-example-layout-updates
 
 Enable this module:
 
-    ./bin/magento module:enable Yireo_TestLayoutUpdates
+    ./bin/magento module:enable Yireo_ExampleLayoutUpdates
     ./bin/magento setup:upgrade

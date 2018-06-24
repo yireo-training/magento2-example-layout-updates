@@ -3,7 +3,8 @@
 namespace Yireo\ExampleLayoutUpdates\Test\Integration\Block;
 
 use Magento\Framework\ObjectManagerInterface;
-use Magento\Framework\App\ObjectManager;
+//use Magento\Framework\App\ObjectManager;
+use Magento\TestFramework\ObjectManager;
 use Magento\Framework\View\LayoutInterface;
 use Magento\TestFramework\TestCase\AbstractController;
 use Yireo\ExampleLayoutUpdates\Block\Example;
@@ -44,7 +45,6 @@ class ExampleTest extends AbstractController
         $this->dispatch('/');
 
         $layout = $this->getLayout();
-        $layout->getUpdate()->addHandle('default');
 
         $blockName = 'exampleLayoutUpdates.example';
         $childNames = $layout->getChildNames('before.body.end');

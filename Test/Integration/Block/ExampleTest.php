@@ -1,9 +1,10 @@
 <?php
+
 namespace Yireo\ExampleLayoutUpdates\Test\Integration\Block;
 
 use Magento\Framework\ObjectManagerInterface;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\View\LayoutInterface;
-use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\AbstractController;
 use Yireo\ExampleLayoutUpdates\Block\Example;
 
@@ -34,11 +35,25 @@ class ExampleTest extends AbstractController
         $response = $this->getResponse();
         $body = $response->getBody();
 
-        //$childNames = $this->getLayout()->getChildNames('before.body.end');
-        //$this->assertContains('exampleLayoutUpdates.example', $childNames, var_export($childNames,true));
-
         $this->assertContains('Yireo_ExampleLayoutUpdates::example.phtml', $body);
         $this->assertContains('Yireo_ExampleLayoutUpdates::example/child.phtml', $body);
+    }
+
+    public function testLayout()
+    {
+        $this->dispatch('/');
+
+        $layout = $this->getLayout();
+        $layout->getUpdate()->addHandle('default');
+
+        $blockName = 'exampleLayoutUpdates.example';
+        $childNames = $layout->getChildNames('before.body.end');
+        $this->assertContains($blockName, $childNames, var_export($childNames, true));
+
+        /** @var Example $exampleBlock */
+        $exampleBlock = $layout->getBlock($blockName);
+        $childNames = $layout->getChildNames($exampleBlock->getNameInLayout());
+        $this->assertContains($blockName.'.child', $childNames, var_export($childNames, true));
     }
 
     /**
@@ -46,8 +61,7 @@ class ExampleTest extends AbstractController
      */
     private function getLayout(): LayoutInterface
     {
-        $this->dispatch('/');
-        return $this->getObjectManager()->create(LayoutInterface::class);
+        return $this->getObjectManager()->get(LayoutInterface::class);
     }
 
     /**
@@ -55,6 +69,6 @@ class ExampleTest extends AbstractController
      */
     private function getObjectManager(): ObjectManagerInterface
     {
-        return Bootstrap::getObjectManager();
+        return ObjectManager::getInstance();
     }
 }

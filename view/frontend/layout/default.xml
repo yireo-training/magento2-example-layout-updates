@@ -2,5 +2,11 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <update handle="custom_remove_newsletter_subscribe_block"/>
-    <body/>
+    <body>
+        <referenceContainer name="before.body.end">
+            <block name="exampleLayoutUpdates.example" class="Yireo\ExampleLayoutUpdates\Block\Example">
+                <block name="exampleLayoutUpdates.example.child" class="Yireo\ExampleLayoutUpdates\Block\Example\Child" />
+            </block>
+        </referenceContainer>
+    </body>
 </page>

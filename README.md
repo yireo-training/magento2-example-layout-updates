@@ -7,7 +7,7 @@ This module applies some example XML layout updates:
 ## Installation
 Install this module using composer:
 
-    composer require yireo-training/magento2-example-layout-updates
+    composer require yireo-training/magento2-example-layout-updates:dev-master
 
 Enable this module:
 

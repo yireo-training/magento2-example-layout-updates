@@ -17,17 +17,21 @@ use Yireo\ExampleLayoutUpdates\Block\Example;
 class ExampleTest extends AbstractController
 {
     /**
-     *
+     * Test if the output of the Block can be generated
      */
     public function testBlockExistence()
     {
         $layout = $this->getLayout();
 
         /** @var Example $layoutExampleBlock */
-        $layoutExampleBlock = $layout->createBlock(Example::class, 'exampleLayoutUpdates.example');
-        $this->assertEquals(get_class($layoutExampleBlock), Example::class);
+        $layoutExampleBlock = $layout->createBlock(Example::class, 'example-layout-updates.example');
+
+        $this->assertInstanceof(Example::class, $layoutExampleBlock);
     }
 
+    /**
+     * Test if the Blocks output appears when rendering the page
+     */
     public function testBlockOutput()
     {
         $this->dispatch('/');
@@ -40,13 +44,18 @@ class ExampleTest extends AbstractController
         $this->assertContains('Yireo_ExampleLayoutUpdates::example/child.phtml', $body);
     }
 
+    /**
+     * Test if the layout is working
+     */
     public function testLayout()
     {
         $this->dispatch('/');
 
         $layout = $this->getLayout();
 
-        $blockName = 'exampleLayoutUpdates.example';
+        $blockName = 'example-layout-updates.example';
+        $this->assertArrayHasKey($blockName, $layout->getAllBlocks());
+
         $childNames = $layout->getChildNames('before.body.end');
         $this->assertContains($blockName, $childNames, var_export($childNames, true));
 
